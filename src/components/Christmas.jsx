@@ -1,61 +1,129 @@
-import React from 'react';
-import { ScrollMenu } from 'react-horizontal-scrolling-menu';
-import 'react-horizontal-scrolling-menu/dist/styles.css';
+import { motion, useTransform, useScroll } from "framer-motion";
+import { useRef } from "react";
 
-const Christmas = () => {
-    const child = { width: `30em`, height: `100%` };
+
+const Example = () => {
   return (
-    <div style={{ height: '90vh', overflowY: 'auto', overflowX: 'auto', width: '100%' }}>
-
-      <ScrollMenu>
-        <div style={{ width: '100px' }} itemId="2" title="Train"> {/* Adjust width as needed */}
-          <h1>WASABIIWOOMAN</h1>
-          <img className="christmas" src="/images/CHRISTMAS.png" alt="Christmas" style={child} />
-        </div>
-        
-        <div style={child} itemId="2" title="Train"> {/* Adjust width as needed */}
-          <img className="train" src="/images/TRAIN.jpg" alt="Train" style={child} />
-        </div>
-        <div itemId="3" title="Street">
-          <img className='street' src="/images/STREET.png" alt="Street" style={child} />
-        </div>
-        <div itemId="4" title="Horns">
-          <img className="horns" src="/images/HORNS.jpg" alt="Horns" style={child} />
-        </div>
-        <div itemId="5" title="Mira">
-          <img className="mira" src="/images/MIRA.png" alt="Mira" style={child} />
-        </div>
-        <div className='transition' itemId="6" title="Transition"></div>
-        <div itemId="7" title="Horns">
-          <img className="horns" src="/images/HORNS.jpg" alt="Horns" style={child} />
-        </div>
-        <div itemId="8" title="Mira">
-          <img className="mira" src="/images/MIRA.png" alt="Mira" style={child} />
-        </div>
-        <div itemId="9" title="Horns">
-          <img className="horns" src="/images/HORNS.jpg" alt="Horns" style={child} />
-        </div>
-        <div itemId="10" title="Mira">
-          <img className="mira" src="/images/MIRA.png" alt="Mira" style={child} />
-        </div>
-        <div itemId="11" title="Jasper">
-          <img className='jasper' src="/images/JASPER.png" alt="Jasper" style={child} />
-        </div>
-        <div itemId="12" title="Falling">
-          <img className="falling" src="/images/FALLING.png" alt="Falling" style={child} />
-        </div>
-        <div itemId="13" title="Text">
-          <p style={child}>
-            In ac mauris eu massa sodales dapibus. Phasellus ut magna id tellus finibus mattis quis euismod massa. Cras non gravida enim, vitae scelerisque sem. Nam feugiat, diam id luctus interdum, velit magna lacinia tortor, vitae lobortis leo turpis sed erat. Phasellus vitae lorem nec arcu ultricies pellentesque. Mauris lacus massa, pharetra id orci eget, imperdiet semper lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vestibulum sollicitudin mauris in ornare. Mauris arcu quam, aliquet non mattis ut, tincidunt pretium ipsum. Aenean sapien urna, congue et tempus vitae, semper sit amet velit. Mauris eget felis porttitor, rutrum turpis in, sollicitudin turpis. Etiam vestibulum tempus neque a ultrices. Sed in mollis odio. Fusce nulla nisl, suscipit venenatis lorem at, convallis tempus ante.
-          </p>
-          <p>Sincerely, Wasabiiwooman</p>
-        </div>
-        <div className='socials-btn' itemId="14" title="Socials">
-          <button>Socials</button>
-        </div>
-      </ScrollMenu>
+    <div className="container">
+      <div className="header">
+        <h1>Wasabiiwooman</h1>
+      </div>
+      <HorizontalScrollCarousel />
     </div>
   );
 };
 
-export default Christmas;
+const HorizontalScrollCarousel = () => {
+  const targetRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+  });
+
+  const x = useTransform(scrollYProgress, [0, 1], ["1%", "-95%"]);
+
+  return (
+    <section ref={targetRef} className="carousel-container">
+      <div className="carousel-inner">
+        <motion.div style={{ x }} className="carousel-items">
+          {cards.map((card) => {
+            if (card.type === 'image') {
+              return <Card card={card} key={card.id} />;
+            } else if (card.type === 'text') {
+              return (
+                <div className="text-card" key={card.id}>
+                  <p>{card.content}</p>
+                </div>
+              );
+            }
+            return null;
+          })}
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+const Card = ({ card }) => {
+    return (
+      <div key={card.id} className={`card ${card.className}`}>
+        <div
+          style={{
+            backgroundImage: `url(${card.url})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+          className="card-bg"
+        ></div>
+        <div className="card-content">
+        </div>
+      </div>
+    );
+  };
+  
+
+export default Example;
+
+const cards = [
+    {
+      url: "images/CHRISTMAS.png",
+      id: 1,
+      type: 'image',
+      className: 'christmas-card'
+    },
+    {
+      url: "images/TRAIN.jpg",
+      id: 2,
+      type: 'image',
+      className: 'train-card'
+    },
+    {
+      url: "images/STREET.png",
+      id: 3,
+      type: 'image',
+      className: 'street-card'
+    },
+    {
+      url: "images/SINK.jpg",
+      id: 4,
+      type: 'image',
+      className: 'sink-card'
+    },
+    {
+      url: "images/HORNS.jpg",
+      id: 5,
+      type: 'image',
+      className: 'horns-card'
+    },
+    {
+      url: "images/MIRA.png",
+      id: 6,
+      type: 'image',
+      className: 'mira-card'
+    },
+    {
+      url: "images/JASPER.png",
+      id: 7,
+      type: 'image',
+      className: 'jasper-card'
+    },
+    {
+      url: "images/FALLING.png",
+      id: 8,
+      type: 'image',
+      className: 'falling-card'
+    },
+    {
+      url: "images/SHY.jpg",
+      id: 9,
+      type: 'image',
+      className: 'shy-card'
+    },
+    {
+    //   content: "In ac mauris eu massa sodales dapibus. Phasellus ut magna id tellus finibus mattis quis euismod massa. Cras non gravida enim, vitae scelerisque sem. Nam feugiat, diam id luctus interdum, velit magna lacinia tortor, vitae lobortis leo turpis sed erat. Phasellus vitae lorem nec arcu ultricies pellentesque. Mauris lacus massa, pharetra id orci eget, imperdiet semper lacus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vestibulum sollicitudin mauris in ornare. Mauris arcu quam, aliquet non mattis ut, tincidunt pretium ipsum. Aenean sapien urna, congue et tempus vitae, semper sit amet velit. Mauris eget felis porttitor, rutrum turpis in, sollicitudin turpis. Etiam vestibulum tempus neque a ultrices. Sed in mollis odio. Fusce nulla nisl, suscipit venenatis lorem at, convallis tempus ante.",
+    //   url:"",
+    //   id: 10,
+    //   type: 'text',
+    //   className: 'hello-text'
+    },
+  ];
+  

@@ -1,68 +1,113 @@
 #root {
-  
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
 }
 
-.main-wrap{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  h1{
-    font-size: 50px;
-  }
-}
 
-.christmas{
-  max-width: 650px;
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
   width: 100%;
+  /* overflow: hidden; */
+  font-family: Arial, sans-serif;
+  scroll-behavior: smooth;
+  
+}
+
+.container {
+  background-color: black;
+  color: white;
+  width: 100vw;
+}
+
+
+.carousel-container {
+  height: 500rem;
+  background-color: black;
   position: relative;
 }
 
-.socials-btn{
-  position: fixed;
-  bottom: 10%;
-  left: 10%;
+.carousel-inner {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
 }
 
-.train{
-  width: 100%;
+.carousel-items {
+  display: flex;
+  gap: 5rem;
 }
 
-.street{
-  width: 100%;
+.card {
+  position: relative;
+  height: 450px;
+  width: 450px;
+  overflow: hidden;
 }
 
-.sink{
-  width: 100%;
-}
-
-.transition{
-  background: rgb(0,0,0);
-  background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 46%, rgba(255,255,255,1) 100%);
-  height: 500px;
-  width: 100%;
-}
-
-.horns{
-  width: 100%;
-}
-
-.mira{
-  width: 100%;
-}
-
-.jasper{
-  width: 100%;
-}
-
-.falling{
-  width: 100%;
-}
-
-.shy{
-  width: 100%;
+.card-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
 }
 
 
+
+.card-content {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: grid;
+  place-content: center;
+}
+
+.test {
+  height: 200vh;
+  background-color: white;
+}
+
+.christmas-card{
+  height: 700px;
+  width: 700px;
+}
+
+.train-card{
+  width: 1400px;
+  height: 800px;
+}
+
+.street-card{
+  height: 800px;
+}
+
+.sink-card{
+  height: 800px;
+}
+
+.horns-card{
+  height: 850px;
+}
+
+.mira-card{
+  height: 800px;
+}
+
+.jasper-card{
+
+}
+
+.falling-card{
+
+}
+
+.shy-card{
+  height: 800px;
+}
+
+.hello-text{
+  width: 500px;
+}
